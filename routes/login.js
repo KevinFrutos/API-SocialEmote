@@ -37,6 +37,7 @@ router.post("/login", async (req, res) => {
 											cookie.serialize("token", token, {
 												httpOnly: true,
 												sameSite: true,
+												maxAge: 60 * 60 * 24 * 7,
 											})
 										)
 										.status(200)

@@ -21,13 +21,13 @@ app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 
 app.get("/", (req, res) => {
-	res.send("hola");
+	res.sendFile(__dirname + "/public/index.html");
 });
 
 app.use("/user", register);
 app.use("/user", login);
 app.use("/user", logout);
 
-app.listen(process.env.PORT || 9000, () => {
+app.listen(process.env.PORT, () => {
 	console.log(`Connect by port: ${process.env.PORT}`);
 });
