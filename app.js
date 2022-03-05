@@ -9,6 +9,7 @@ const connection = require("./controllers/database");
 //ROUTES
 const register = require("./routes/register");
 const login = require("./routes/login");
+const logout = require("./routes/logout");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", register);
 app.use("/user", login);
+app.use("/user", logout);
 
 app.listen(process.env.PORT || 9000, () => {
 	console.log(`Connect by port: ${process.env.PORT}`);
