@@ -58,7 +58,7 @@
 
 			logoutBtn.onclick = async () => {
 				try {
-					const respuesta = await fetch("http://localhost:9000/user/login", {
+					const respuesta = await fetch("http://localhost:9000/user/logout", {
 						method: "POST",
 					});
 					console.log(respuesta.status === 200 ? "OK" : respuesta.status);

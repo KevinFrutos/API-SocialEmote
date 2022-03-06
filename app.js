@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyparser = require("body-parser");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 //DATABASE
@@ -13,17 +14,17 @@ const logout = require("./routes/logout");
 
 const app = express();
 
-connection();
-
 app.use(cors());
-
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
+app.use(cookieParser());
+connection();
 
 app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/public/index.html");
 });
 
+//USER ENDPOINTS
 app.use("/user", register);
 app.use("/user", login);
 app.use("/user", logout);

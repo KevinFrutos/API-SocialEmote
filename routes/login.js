@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
-const cookie = require("cookie");
 const mongoose = require("mongoose");
 const Session = require("../models/schema_sessions");
 
@@ -32,14 +31,11 @@ router.post("/login", async (req, res) => {
 									res.status(400).send();
 								} else {
 									res
-										.setHeader(
-											"Set-Cookie",
-											cookie.serialize("token", token, {
-												httpOnly: true,
-												sameSite: true,
-												maxAge: 60 * 60 * 24 * 7,
-											})
-										)
+										.cookie("token", token, {
+											httpOnly: true,
+											sameSite: true,
+											maxAge: 60 * 60 * 24 * 7,
+										})
 										.status(200)
 										.send();
 								}
