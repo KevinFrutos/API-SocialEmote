@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Session = require("../models/schema_sessions");
 
 router.post("/login", async (req, res) => {
-	if (req.body) {
+	if (req.body && (!req.cookies.token || req.cookies.token === "undefined")) {
 		const { user, passwd: password } = req.body;
 		try {
 			const cursor = await mongoose.connection.collection("registers").findOne({ user: user });
