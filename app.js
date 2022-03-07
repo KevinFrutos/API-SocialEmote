@@ -12,11 +12,14 @@ const register = require("./routes/register");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 
+//MIDDLEWARES
+const verifyToken = require("./middlewares/verifyToken");
+
 const app = express();
 
 app.use(
 	cors({
-		origin: ["http://localhost:5500"],
+		origin: ["http://localhost:5500", "http://127.0.0.1:5500"],
 		credentials: true,
 	})
 );
@@ -26,13 +29,13 @@ app.use(cookieParser());
 connection();
 
 app.get("/", (req, res) => {
-	res.sendFile(__dirname + "/public/index.html");
+	res.status(200).send("Estas conectado a la API de login!");
 });
 
 //USER ENDPOINTS
 app.use("/user", register);
 app.use("/user", login);
-app.use("/user", logout);
+app.use("/user", verifyToken, logout);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Connect by port: ${process.env.PORT}`);
