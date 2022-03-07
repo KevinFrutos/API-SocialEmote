@@ -1,14 +1,14 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
-const mongoose = require("mongoose");
+const Register = require("../models/schema_register");
 const Session = require("../models/schema_sessions");
 
 router.post("/login", async (req, res) => {
 	if (req.body && (!req.cookies.token || req.cookies.token === "undefined")) {
 		const { user, passwd: password } = req.body;
 		try {
-			const cursor = await mongoose.connection.collection("registers").findOne({ user: user });
+			const cursor = await Register.findOne({ user: user });
 			if (cursor) {
 				const { passwd } = cursor;
 				bcrypt.compare(password, passwd, (err, result) => {

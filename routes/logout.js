@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { connection } = require("mongoose");
 const Session = require("../models/schema_sessions.js");
 
 router.post("/logout", async (req, res) => {
