@@ -18,10 +18,11 @@ router.post("/login", async (req, res) => {
 					} else {
 						if (result) {
 							const token = uuidv4();
+							const token_hash = bcrypt.hashSync(token, 10);
 
 							const session = new Session({
 								user,
-								token,
+								token: token_hash,
 								role: "Client",
 							});
 
@@ -32,6 +33,11 @@ router.post("/login", async (req, res) => {
 								} else {
 									res
 										.cookie("token", token, {
+											httpOnly: true,
+											sameSite: true,
+											maxAge: 60 * 60 * 24 * 7,
+										})
+										.cookie("user", user, {
 											httpOnly: true,
 											sameSite: true,
 											maxAge: 60 * 60 * 24 * 7,

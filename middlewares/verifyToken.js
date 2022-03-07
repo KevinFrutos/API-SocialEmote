@@ -1,11 +1,12 @@
+const bcrypt = require("bcrypt");
 const Session = require("../models/schema_sessions.js");
 
 const validarToken = async (req, res, next) => {
-	if (req.cookies.token) {
-		const { token } = req.cookies;
+	if (req.cookies.token && req.cookies.user) {
+		const { token, user } = req.cookies;
 		try {
-			const cursor = await Session.findOne({ token: token });
-			if (cursor) {
+			const cursor = await Session.findOne({ user });
+			if (cursor && bcrypt.compareSync(token, cursor.token)) {
 				next();
 			} else {
 				res.status(401).json({ error: "Acceso denegado" });

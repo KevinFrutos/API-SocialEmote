@@ -2,11 +2,16 @@ const router = require("express").Router();
 const Session = require("../models/schema_sessions.js");
 
 router.post("/logout", async (req, res) => {
-	const { token } = req.cookies;
+	const { user } = req.cookies;
 	try {
-		await Session.deleteOne({ token: token });
+		await Session.deleteOne({ user: user });
 		res
 			.cookie("token", undefined, {
+				httpOnly: true,
+				sameSite: true,
+				expires: 0,
+			})
+			.cookie("user", undefined, {
 				httpOnly: true,
 				sameSite: true,
 				expires: 0,
