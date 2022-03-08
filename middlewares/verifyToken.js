@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const Session = require("../models/schema_sessions.js");
+const Session = require("../models/schema_sessions");
 
 const validarToken = async (req, res, next) => {
 	if (req.cookies.token && req.cookies.user) {
