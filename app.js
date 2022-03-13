@@ -12,7 +12,9 @@ const register = require("./routes/register");
 const login = require("./routes/login");
 const logout = require("./routes/logout");
 const addFollow = require("./routes/addFollow");
-const getFollows = require("./routes/getFollows");
+const unFollow = require("./routes/unFollow");
+// DEPRECATED const getFollows = require("./routes/getFollows");
+const getUserData = require("./routes/getUserData");
 const postPublications = require("./routes/postPublication");
 const getPublications = require("./routes/getPublications");
 
@@ -44,7 +46,9 @@ app.use("/user", getPublications);
 //PROTECTED USER ENDPOINTS
 app.use("/user", verifyToken, logout);
 app.use("/user", verifyToken, addFollow);
-app.use("/user", verifyToken, getFollows);
+app.use("/user", verifyToken, unFollow);
+// DEPRECATED app.use("/user", verifyToken, getFollows);
+app.use("/user", verifyToken, getUserData);
 app.use("/user", verifyToken, postPublications);
 
 app.listen(process.env.PORT, () => {
