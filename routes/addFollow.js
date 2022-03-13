@@ -10,7 +10,19 @@ router.put("/follow", async (req, res) => {
 		// UNA VEZ QUE CAMBIO LOS DATOS HAGO UNA ULTIMA PETICIÓN A LA BASE DE DATOS
 		// PARA QUE ME DE LOS DATOS ACTUALIZADOS
 		const cursor = await Register.findOne({ user: user });
-		res.status(200).json(cursor);
+		const { name, last_name, email, followers, following } = cursor;
+		const followers_number = followers.length;
+		const following_number = following.length;
+		res.status(200).json({
+			user,
+			name,
+			last_name,
+			email,
+			followers,
+			followers_number,
+			following,
+			following_number,
+		});
 	} catch (error) {
 		console.log(error);
 		res.status(400).send();
