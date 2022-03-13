@@ -16,6 +16,11 @@ router.post("/logout", async (req, res) => {
 				sameSite: true,
 				expires: 0,
 			})
+			.cookie("isLogged", undefined, {
+				httpOnly: false,
+				sameSite: true,
+				maxAge: 0,
+			})
 			.status(200)
 			.send();
 	} catch (error) {

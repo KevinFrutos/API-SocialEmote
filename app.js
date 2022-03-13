@@ -23,7 +23,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: ["http://localhost:5500"],
+		origin: ["http://localhost:5500", "http://localhost:3000"],
 		credentials: true,
 	})
 );
@@ -39,11 +39,13 @@ app.get("/", (req, res) => {
 //USER ENDPOINTS
 app.use("/user", register);
 app.use("/user", login);
+app.use("/user", getPublications);
+
+//PROTECTED USER ENDPOINTS
 app.use("/user", verifyToken, logout);
 app.use("/user", verifyToken, addFollow);
 app.use("/user", verifyToken, getFollows);
 app.use("/user", verifyToken, postPublications);
-app.use("/user", verifyToken, getPublications);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Connect using port: ${process.env.PORT}`);

@@ -2,11 +2,12 @@ const router = require("express").Router();
 const Publication = require("../models/schema_publication");
 
 router.get("/publication", async (req, res) => {
-	const { user } = req.cookies;
+	// SE SUSPENDE EL MATCH POR USUARIO POR EL MOMENTO
+	//const { user } = req.cookies;
 	const cursor = Publication.aggregate([
-		{ $match: { user: user } },
+		//{ $match: { user: user } },
 		{ $sort: { publication_date: -1 } },
-		{ $limit: 2 },
+		{ $limit: 20 },
 	]);
 
 	const data = [];
