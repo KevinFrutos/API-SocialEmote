@@ -17,6 +17,8 @@ const unFollow = require("./routes/unFollow");
 const getUserData = require("./routes/getUserData");
 const postPublications = require("./routes/postPublication");
 const getPublications = require("./routes/getPublications");
+const addLike = require("./routes/addLike");
+const unLike = require("./routes/unLike");
 
 //MIDDLEWARES
 const verifyToken = require("./middlewares/verifyToken");
@@ -50,6 +52,8 @@ app.use("/user", verifyToken, unFollow);
 // DEPRECATED app.use("/user", verifyToken, getFollows);
 app.use("/user", verifyToken, getUserData);
 app.use("/user", verifyToken, postPublications);
+app.use("/user", verifyToken, addLike);
+app.use("/user", verifyToken, unLike);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Connect using port: ${process.env.PORT}`);
