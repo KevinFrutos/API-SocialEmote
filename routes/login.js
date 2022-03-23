@@ -35,17 +35,17 @@ router.post("/login", async (req, res) => {
 										.cookie("token", token, {
 											httpOnly: true,
 											sameSite: true,
-											maxAge: 60 * 60 * 24 * 7,
+											maxAge: 24 * 60 * 60 * 1000,
 										})
 										.cookie("user", user, {
 											httpOnly: true,
 											sameSite: true,
-											maxAge: 60 * 60 * 24 * 7,
+											maxAge: 24 * 60 * 60 * 1000,
 										})
 										.cookie("isLogged", true, {
 											httpOnly: false,
 											sameSite: true,
-											maxAge: 60 * 60 * 24 * 7,
+											maxAge: 24 * 60 * 60 * 1000,
 										})
 										.status(200)
 										.send();
