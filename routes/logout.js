@@ -8,17 +8,17 @@ router.post("/logout", async (req, res) => {
 		res
 			.cookie("token", undefined, {
 				httpOnly: true,
-				sameSite: none,
+				sameSite: true,
 				expires: 0,
 			})
 			.cookie("user", undefined, {
 				httpOnly: true,
-				sameSite: none,
+				sameSite: true,
 				expires: 0,
 			})
 			.cookie("isLogged", undefined, {
 				httpOnly: false,
-				sameSite: none,
+				sameSite: true,
 				maxAge: 0,
 			})
 			.status(200)
