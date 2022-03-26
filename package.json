@@ -4,7 +4,8 @@
   "description": "This is a social app with emotes only",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon app"
+    "dev": "nodemon app",
+    "start": "node app"
   },
   "keywords": [],
   "author": "Kevin Frutos",
