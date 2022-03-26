@@ -62,5 +62,3 @@ app.use("/user", verifyToken, unLike);
 app.listen(process.env.PORT, () => {
 	console.log(`Connect using port: ${process.env.PORT}`);
 });
-
-module.exports = app;
