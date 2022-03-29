@@ -21,6 +21,7 @@ const deletePublication = require("./routes/deletePublication");
 const getPublications = require("./routes/getPublications");
 const addLike = require("./routes/addLike");
 const unLike = require("./routes/unLike");
+const addComment = require("./routes/addComment");
 
 //MIDDLEWARES
 const verifyToken = require("./middlewares/verifyToken");
@@ -58,6 +59,7 @@ app.use("/user", verifyToken, postPublication);
 app.use("/user", verifyToken, deletePublication);
 app.use("/user", verifyToken, addLike);
 app.use("/user", verifyToken, unLike);
+app.use("/user", verifyToken, addComment);
 
 app.listen(process.env.PORT, () => {
 	console.log(`Connect using port: ${process.env.PORT}`);
