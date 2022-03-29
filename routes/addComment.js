@@ -3,9 +3,9 @@ const Publication = require("../models/schema_publication");
 
 router.post("/publication/comment", async (req, res) => {
 	try {
-		if (req.body) {
-			const { user } = req.cookies;
-			const { idPost, comment } = req.body;
+		const { user } = req.cookies;
+		const { idPost, comment } = req.body;
+		if (comment) {
 			await Publication.updateOne({ _id: idPost }, { $push: { comments: { user_comment: user, comment: comment } } });
 			// UNA VEZ QUE CAMBIO LOS DATOS HAGO UNA ULTIMA PETICIÓN A LA BASE DE DATOS
 			// PARA QUE ME DE LOS DATOS ACTUALIZADOS
