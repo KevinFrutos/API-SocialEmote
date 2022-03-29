@@ -18,12 +18,6 @@ router.post("/logout", async (req, res) => {
 				secure: true,
 				expires: 0,
 			})
-			.cookie("isLogged", undefined, {
-				httpOnly: false,
-				sameSite: "none",
-				secure: true,
-				maxAge: 0,
-			})
 			.status(200)
 			.send();
 	} catch (error) {
