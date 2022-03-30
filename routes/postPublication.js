@@ -3,9 +3,9 @@ const Publication = require("../models/schema_publication");
 
 router.post("/publication", (req, res) => {
 	try {
-		if (req.body) {
-			const { user } = req.cookies;
-			const { description } = req.body;
+		const { user } = req.cookies;
+		const { description } = req.body;
+		if (description && description.length <= 256) {
 			const publication = new Publication({
 				user: user,
 				publication_date: Date.now(),
