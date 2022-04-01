@@ -1,11 +1,14 @@
 const express = require("express");
 const bodyparser = require("body-parser");
+const { WebSocketServer } = require("ws");
+const server = require("http").createServer();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 //DATABASE
 const connection = require("./controllers/database");
+const Publication = require("./models/schema_publication");
 
 //ROUTES
 const register = require("./routes/register");
@@ -61,6 +64,29 @@ app.use("/user", verifyToken, addLike);
 app.use("/user", verifyToken, unLike);
 app.use("/user", verifyToken, addComment);
 
-app.listen(process.env.PORT, () => {
+// WEBSOCKET SERVER IMPLEMENTATION
+const wsServer = new WebSocketServer({ server: server });
+
+// POR CADA REQUEST DE UN CLIENTE, SE CREA UN NUEVO WEBSOCKET
+server.on("request", app);
+
+wsServer.on("connection", (client, req) => {
+	Publication.watch([], { fullDocument: "updateLookup" }).on("change", async () => {
+		const cursor = await Publication.aggregate([{ $sort: { publication_date: -1 } }, { $limit: 20 }]);
+		const data = [];
+		for await (const doc of cursor) {
+			data.push(doc);
+		}
+		client.send(
+			JSON.stringify({
+				type: "publicaciones",
+				publicaciones: data,
+			})
+		);
+	});
+});
+
+// SERVER LISTENING
+server.listen(process.env.PORT, () => {
 	console.log(`Connect using port: ${process.env.PORT}`);
 });
