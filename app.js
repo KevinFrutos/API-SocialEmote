@@ -9,6 +9,7 @@ require("dotenv").config();
 //DATABASE
 const connection = require("./controllers/database");
 const Publication = require("./models/schema_publication");
+const Session = require("./models/schema_sessions");
 
 //ROUTES
 const register = require("./routes/register");
@@ -71,6 +72,7 @@ const wsServer = new WebSocketServer({ server: server });
 server.on("request", app);
 
 wsServer.on("connection", (client, req) => {
+	const user = req.cookies?.user;
 	Publication.watch([], { fullDocument: "updateLookup" }).on("change", async () => {
 		const cursor = await Publication.aggregate([{ $sort: { publication_date: -1 } }, { $limit: 20 }]);
 		const data = [];
@@ -83,6 +85,18 @@ wsServer.on("connection", (client, req) => {
 				publicaciones: data,
 			})
 		);
+	});
+	Session.watch([], { fullDocument: "updateLookup" }).on("change", async change => {
+		if (change.operationType === "delete") {
+			const cursor = await Session.find({ user });
+			if (cursor.length === 0) {
+				client.send(
+					JSON.stringify({
+						type: "session",
+					})
+				);
+			}
+		}
 	});
 });
 
