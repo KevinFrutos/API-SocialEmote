@@ -75,9 +75,8 @@ server.on("request", app);
 const users = {};
 
 wsServer.on("connection", (client, req) => {
-	const user = req.headers.cookie?.split(" ").filter(user => user.includes("user="))[0].split("=")[1].split(";")[0];
+	const user = req.headers.cookie?.split(" ").filter(user => user.includes("user="))[0]?.split("=")[1].split(";")[0];
 	users[user] = client;
-	console.log(Object.keys(users));
 	Publication.watch([], { fullDocument: "updateLookup" }).on("change", async () => {
 		const cursor = await Publication.aggregate([{ $sort: { publication_date: -1 } }, { $limit: 20 }]);
 		const data = [];

@@ -8,6 +8,22 @@ const validarToken = async (req, res, next) => {
 			const cursor = await Session.findOne({ user });
 			if (cursor && bcrypt.compareSync(token, cursor.token)) {
 				next();
+			} else if (!cursor) {
+				res
+					.cookie("token", undefined, {
+						httpOnly: true,
+						sameSite: "none",
+						secure: true,
+						expires: 0,
+					})
+					.cookie("user", undefined, {
+						httpOnly: true,
+						sameSite: "none",
+						secure: true,
+						expires: 0,
+					})
+					.status(401)
+					.send();
 			} else {
 				res.status(401).json({ error: "Acceso denegado" });
 			}

@@ -60,6 +60,31 @@ router.post("/login", async (req, res) => {
 			console.log(error);
 			res.status(400).send();
 		}
+	} else if (req.cookies.user) {
+		try {
+			const user = req.cookies.user;
+			const cursor = await Session.findOne({ user });
+			if (!cursor) {
+				res
+					.cookie("token", undefined, {
+						httpOnly: true,
+						sameSite: "none",
+						secure: true,
+						expires: 0,
+					})
+					.cookie("user", undefined, {
+						httpOnly: true,
+						sameSite: "none",
+						secure: true,
+						expires: 0,
+					})
+					.status(401)
+					.send();
+			}
+		} catch (error) {
+			console.log(error);
+			res.status(400).send();
+		}
 	} else {
 		res.status(400).send();
 	}
