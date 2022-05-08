@@ -81,7 +81,7 @@ wsServer.on("connection", (client, req) => {
 		const cursor = await Publication.aggregate([{ $sort: { publication_date: -1 } }, { $limit: 20 }]);
 		const data = [];
 		for await (const doc of cursor) {
-			data.push(doc);
+			data.push(doc)
 		}
 		client.send(
 			JSON.stringify({
