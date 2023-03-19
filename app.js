@@ -30,7 +30,7 @@ const app = express();
 
 app.use(
 	cors({
-		origin: ["http://localhost:5500", "http://localhost:3000", "https://socialemote-front.web.app"],
+		origin: ["http://localhost:5500", "http://localhost:3000", "http://social_emote_front:3000"],
 		credentials: true,
 	})
 );
