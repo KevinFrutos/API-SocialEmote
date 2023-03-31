@@ -16,8 +16,8 @@ router.put("/data", async (req, res) => {
 			await Register.updateOne({ user: user }, { email: newEmail });
 		}
 		if (newPassword && newPassword !== "") {
-			const passwd = bcrypt.hashSync(newPassword, 10);
-			await Register.updateOne({ user: user }, { password: passwd });
+			const password = bcrypt.hashSync(newPassword, 10);
+			await Register.updateOne({ user: user }, { passwd: password });
 		}
 		// UNA VEZ QUE CAMBIO LOS DATOS HAGO UNA ULTIMA PETICIÓN A LA BASE DE DATOS
 		// PARA QUE ME DE LOS DATOS ACTUALIZADOS
