@@ -28,12 +28,13 @@ const verifyToken = require("./middlewares/verifyToken");
 
 const app = express();
 
-app.use(
-	cors({
-		origin: ["http://localhost:5500", "http://localhost:3000", "https://socialemote.duckdns.org"],
-		credentials: true,
-	})
-);
+const corsOptions = {
+	origin: ["http://localhost", "http://localhost:5500", "http://localhost:3000", "https://socialemote.duckdns.org"],
+	credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(bodyparser.json());
 app.use(cookieParser());

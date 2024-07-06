@@ -1,14 +1,10 @@
 const mongoose = require("mongoose");
 
-const url_usuarios = `mongodb://${process.env.HOST}:27017/${process.env.DBUSERS}`;
+const databaseURL = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@${process.env.HOST}/${process.env.DBNAME}?retryWrites=true&w=majority`;
 
 const connection = async () => {
 	try {
-		await mongoose.connect(url_usuarios, {
-			auth: {
-				username: process.env.USER,
-				password: process.env.PASSWORD,
-			  },
+		await mongoose.connect(databaseURL, {
 			authSource: "admin",
 			useNewUrlParser: true,
 			useUnifiedTopology: true,
