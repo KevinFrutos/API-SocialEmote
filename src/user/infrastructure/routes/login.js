@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
-const Register = require("../../domain/models/schema_register");
-const Session = require("../../domain/models/schema_sessions");
+const Register = require("../../domain/models/register");
+const Session = require("../../domain/models/sessions");
 
 router.post("/login", async (req, res) => {
 	if (req.body && (!req.cookies.token || req.cookies.token === "undefined")) {

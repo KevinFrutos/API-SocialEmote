@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Publication = require("../../domain/models/schema_publication");
+const Publication = require("../../domain/models/publication");
 
 router.get("/publication", async (req, res) => {
 	// SE SUSPENDE EL MATCH POR USUARIO POR EL MOMENTO
