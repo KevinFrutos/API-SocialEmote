@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const Register = require("../models/schema_register");
+const Register = require("../../domain/models/schema_register");
 
-router.put("/unfollow", async (req, res) => {
+router.put("/follow", async (req, res) => {
 	try {
 		const { user } = req.cookies;
 		const { user_followed } = req.body;
-		await Register.updateOne({ user: user }, { $pull: { following: { user: user_followed } } });
-		await Register.updateOne({ user: user_followed }, { $pull: { followers: { user: user } } });
+		await Register.updateOne({ user: user }, { $push: { following: { user: user_followed } } });
+		await Register.updateOne({ user: user_followed }, { $push: { followers: { user: user } } });
 		// UNA VEZ QUE CAMBIO LOS DATOS HAGO UNA ULTIMA PETICIÓN A LA BASE DE DATOS
 		// PARA QUE ME DE LOS DATOS ACTUALIZADOS
 		const cursor = await Register.findOne({ user: user });

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const bcrypt = require("bcrypt");
-const Register = require("../models/schema_register");
+const Register = require("../../domain/models/schema_register");
 
 router.put("/data", async (req, res) => {
 	try {

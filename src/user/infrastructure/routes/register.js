@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcrypt");
-const Register = require("../models/schema_register.js");
+const Register = require("../../domain/models/schema_register.js");
 
 router.post(
 	"/register",
