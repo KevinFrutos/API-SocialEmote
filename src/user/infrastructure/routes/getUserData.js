@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Register = require("../../domain/models/schema_register");
+const Register = require("../../domain/models/register");
 
 router.get("/data", async (req, res) => {
 	try {
