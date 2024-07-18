@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Session = require("../models/schema_sessions.js");
+const Session = require("../../domain/models/schema_sessions.js");
 
 router.post("/logout", async (req, res) => {
 	const { user } = req.cookies;

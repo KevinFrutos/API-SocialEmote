@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Register = require("../models/schema_register");
+const Register = require("../../domain/models/schema_register");
 
 router.get("/follow", async (req, res) => {
 	try {

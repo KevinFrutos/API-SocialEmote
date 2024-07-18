@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const Publication = require("../models/schema_publication");
+const Publication = require("../../domain/models/schema_publication");
 
 router.post("/publication", (req, res) => {
 	try {

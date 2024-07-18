@@ -5,26 +5,26 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 //DATABASE
-const connection = require("./controllers/database");
+const connection = require("./src/shared/database/infrastructure/connection");
 
 //ROUTES
-const register = require("./routes/register");
-const login = require("./routes/login");
-const logout = require("./routes/logout");
-const addFollow = require("./routes/addFollow");
-const unFollow = require("./routes/unFollow");
+const register = require("./src/user/infrastructure/routes/register");
+const login = require("./src/user/infrastructure/routes/login");
+const logout = require("./src/user/infrastructure/routes/logout");
+const addFollow = require("./src/user/infrastructure/routes/addFollow");
+const unFollow = require("./src/user/infrastructure/routes/unFollow");
 // DEPRECATED const getFollows = require("./routes/getFollows");
-const getUserData = require("./routes/getUserData");
-const updateUserData = require("./routes/updateUserData");
-const postPublication = require("./routes/postPublication");
-const deletePublication = require("./routes/deletePublication");
-const getPublications = require("./routes/getPublications");
-const addLike = require("./routes/addLike");
-const unLike = require("./routes/unLike");
-const addComment = require("./routes/addComment");
+const getUserData = require("./src/user/infrastructure/routes/getUserData");
+const updateUserData = require("./src/user/infrastructure/routes/updateUserData");
+const postPublication = require("./src/publication/infrastructure/routes/postPublication");
+const deletePublication = require("./src/publication/infrastructure/routes/deletePublication");
+const getPublications = require("./src/publication/infrastructure/routes/getPublications");
+const addLike = require("./src/publication/infrastructure/routes/addLike");
+const unLike = require("./src/publication/infrastructure/routes/unLike");
+const addComment = require("./src/publication/infrastructure/routes/addComment");
 
 //MIDDLEWARES
-const verifyToken = require("./middlewares/verifyToken");
+const verifyToken = require("./src/shared/infrastructure/middlewares/verifyToken");
 
 const app = express();
 
